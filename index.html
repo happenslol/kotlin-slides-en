@@ -1,0 +1,586 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <link href="https://fonts.googleapis.com/css?family=Fira+Sans:400,400i,500,500i,800,800i" rel="stylesheet">
+        <link href="https://unpkg.com/firacode/distr/fira_code.css" rel="stylesheet">
+
+        <title>reveal.js</title>
+
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css">
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="css/zenburn.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h2>Kotlin</h2>
+                    <h5>The Better Java?</h5>
+                </section>
+            
+                <section id="me">
+            
+                <section id="about">
+                    <section id="about1">
+                        <h3>Kotlin</h3>
+                        <p>JVM-Sprache by JetBrains (IntelliJ, YouTrack)</p>
+                        <p>1.0 release in 2016</p>
+                        <br>
+                        <blockquote>
+                        <i class="fas fa-quote-left fa-1g fa-pull-left fa-border"></i>
+                        Concise, simple and very easy to read (and write)
+                        </blockquote>
+                    </section>
+            
+                    <section id="about2">
+                        <ul>
+                            <li>Less boilerplate as opposed to Java</li>
+                            <li>Transform well-known conventions into language constructs</li>
+                            <li>Simplification of common tasks</li>
+                            <li>Eliminate null pointer exceptions</li>
+                            <li>Functional concepts</li>
+                        </ul>
+                    </section>
+                </section>
+            
+                <section id="projekt">
+                    <h3>Sample project</h3>
+                    <p>API for managing a pet shop</p>
+                    <p>Spring Boot with MongoDB</p>
+                    <p>Entities: Animal, Species, Food, Employee...</p>
+                </section>
+            
+                <section id="syntax">
+                    <section id="syntax1">
+                        <h3>Syntax and differences to Java</h3>
+                        <ul>
+                        <li>No semicolons!</li>
+                        <li>
+                            No "unnecessary" (curly) braces<br>
+                            <pre><code data-trim class="kotlin">
+                            // correct!
+                            class SomeClass
+                            </code></pre>
+                        </li>
+                        <li>Public by default</li>
+                        <li>
+                            No inheritance by default<br>
+                            <pre><code data-trim class="kotlin">
+                            // error!
+                            class CannotInherit
+                            class SomeSubClass : CannotInherit
+                            </code></pre>
+                            <pre><code data-trim class="kotlin">
+                            // correct
+                            open class CanInherit
+                            class SomeSubClass : CanInherit
+                            </code></pre>
+                        </li>
+                        </ul>
+                    </section>
+            
+                    <section id="syntax2">
+                        <ul>
+                        <li>Type-Inference (<pre class="inline-code"><code class="kotlin">var</code></pre>/<pre class="inline-code"><code class="kotlin">val</code></pre>)</li>
+                        <li>
+                            Funktionen<br>
+                            <pre><code data-trim class="kotlin">
+                            fun foo(param: Type) : ReturnType {}
+                            </code></pre>
+                        </li>
+                        <li>Multiple public Classes/Interfaces per file</li>
+                        <li>
+                            Methods outside of class bodies allowed<br>
+                            <pre><code data-trim class="kotlin">listOf(), mapOf(), error()</code></pre>
+                        </li>
+                        </ul>
+                    </section>
+            
+                    <section id="syntax3">
+                        <b>Expressions / Assignments</b>
+                        <pre><code data-trim class="kotlin">
+                        val foo = if (bar) "Hello" else "World"
+                        </code></pre>
+            
+                        <pre><code data-trim class="kotlin">
+                        val foo = when (bar) {
+                            "Some Value" -> "Hello"
+                            "Some Other Value" -> "World"
+                            else -> "This is the default"
+                        }
+                        </code></pre>
+            
+                        <pre><code data-trim class="kotlin">
+                        val test = try {
+                            Integer.parseInt("15")
+                        } catch (e: NumberFormatException) {
+                            0
+                        }
+                        </code></pre>
+            
+                        <br>
+                        <small>Shorthand for assigning expressions to functions:</small>
+                        <pre><code data-trim class="kotlin">
+                        fun helloWorld(): String = "Hello World!"
+                        </code></pre>
+                    </section>
+            
+                    <section id="syntax4">
+                        <p>Constructors</p>
+                        <pre><code data-trim class="kotlin">
+                            class ExampleClass(param1: String, param2: Int)
+                        </code></pre>
+            
+                        <p>Instancing</p>
+                        <pre><code data-trim class="kotlin">
+                            val instancedExampleClass = ExampleClass("Test", 123)
+                        </code></pre>
+                    </section>
+            
+                    <section id="syntax5">
+                        <p>Fields can be declared directly in the constructor!</p>
+            
+                        <pre><code data-trim class="kotlin">
+                            class ExampleClass(param1: String, param2: Int) {
+                                val property1 = param1
+                                val property2 = param2
+                            }
+                        </code></pre>
+            
+                        <i class="fas fa-arrow-down"></i>
+            
+                        <pre><code data-trim class="kotlin">
+                            class ExampleClass(
+                                val property1: String,
+                                val property2: Int
+                            )
+                        </code></pre>
+                    </section>
+            
+                    <section id="syntax6">
+                        <h5>Named parameters!</h5>
+            
+                        <pre><code data-trim class="kotlin">
+                        fun functionWithLotsOfParams(
+                            p1: String, p2: Int, p3: Int, p4: String,
+                            p5: String = "default", p6: Int = 0
+                        ): Typ
+            
+                        val test = functionWithLotsOfParams(
+                            p1 = "Hello World!",
+                            p2 = 13,
+                            p3 = 24,
+                            p4 = "test",
+                            p6 = 14
+                        )
+                        </code></pre>
+                    </section>
+                </section>
+            
+                <section id="null">
+                    <section id="null1">
+                        <h3>Null Safety</h3>
+                    </section>
+            
+                    <section id="null2">
+                        <pre><code data-trim class="kotlin">
+                        fun findAnimal(name: String): Animal?
+            
+                        val animal = findAnimal("Peter")
+            
+                        // error!
+                        print(animal.species)
+                        </code></pre>
+                    </section>
+            
+                    <section id="null3">
+                        <h4>Solution</h4>
+                        Safe call <pre class="inline-code"><code class="kotlin">?</code></pre> and Elvis-Operator <pre class="inline-code"><code class="kotlin">?:</code></pre>
+                        <pre><code data-trim class="kotlin">
+                        fun findAnimal(name: String): Animal?
+            
+                        val animal = findAnimal("Peter")
+            
+                        val species = animal?.species ?: "Animal not found"
+            
+                        // arbitrary nesting!
+                        val animalPricePlus10 = animal?.price?.plus(10) ?: 0
+                        </code></pre>
+                    </section>
+            
+                    <section id="null4">
+                        <h4>Unchecked Exceptions</h4>
+            
+                        <p>Exceptions are Expressions and satisfy any return type!</p>
+            
+                        <pre><code data-trim class="java">
+                            @GetMapping("/{name}")
+                            public Animal findOne(@PathVariable("name") String name) {
+                                Animal animal = animalService.findAnimal(name)
+                
+                                if (animal == null)
+                                    throw AnimalNotFoundException()
+                
+                                return animal
+                            }
+                        </code></pre>
+            
+                        <i class="fas fa-arrow-down"></i>
+            
+                        <pre><code data-trim class="kotlin">
+                            @GetMapping("/{name}")
+                            fun findOne(@PathVariable("name") name: String): Animal =
+                                animalService.findAnimal(name) ?: throw AnimalNotFoundException()
+                        </code></pre>
+                    </section>
+                </section>
+            
+                <section id="smart">
+                    <h3>Smart casts</h3>
+                    <pre><code data-trim class="kotlin">
+                        if (foo is String) {
+                            // No further cast needed!
+                        }
+                    </code></pre>
+            
+                    <pre><code data-trim class="kotlin">
+                        val foo: String? = ...
+            
+                        if (foo != null) {
+                            // foo is now String
+                            // and *not* String?
+                        }
+                    </code></pre>
+                </section>
+            
+                <section id="classes">
+                    <section id="classes1">
+                        <h3>Data Classes</h3>
+                    </section>
+            
+                    <section id="classes2">
+                        <pre><code data-trim class="kotlin">
+                        data class Animal(
+                            val id: String = UUID.randomUUID.toString(),
+                            val name: String,
+                            val species: String,
+                            val age: Int,
+                            val price: Int? = null
+                        )
+                        </code></pre>
+            
+                        <pre><code data-trim class="kotlin">
+                        val animal = Animal(name = "Blacky", species = "Dog", age = 5)
+                        </code></pre>
+                        <br>
+                        Getter, Setter, <pre class="inline-code"><code class="kotlin">equals()</code></pre>, <pre class="inline-code"><code class="kotlin">hashCode()</code></pre> <pre class="inline-code"><code class="kotlin">toString()</code></pre> automatically implemented!
+                    </section>
+            
+                    <section id="classes3">
+                        <h3>Automatic Properties!</h3>
+                        <p>Getter/Setter are implemented for all fields</p>
+                        <p>Custom Getters/Setters</p>
+                    </section>
+                </section>
+            
+                <section id="ext">
+                    <section id="ext1">
+                        <h3>Extension Functions</h3>
+                    </section>
+            
+                    <section id="ext2">
+                        <p>In Java:</p>
+                        <pre><code class="java">StringUtils, DateUtils, ArrayUtils, SetUtils...</code></pre>
+                        <br><br>
+                        <p>In Kotlin:</p>
+                        <p>Extension Functions! &nbsp;&nbsp;<i class="fas fa-bolt"></i></p>
+                    </section>
+            
+                    <section id="ext3">
+                        <pre><code class="kotlin" data-trim>
+                        fun String.padLeft(): String = "    " + this
+                        </code></pre>
+            
+                        <pre><code class="kotlin" data-trim>
+                        fun String.isAlphanumeric(): Boolean {
+                            val regex = Regex("[A-Za-z0-9]+")
+                            return this.matches(regex)
+                        }
+                        </code></pre>
+                    </section>
+            
+                    <section id="ext5">
+                        On any type, even generics!
+            
+                        <pre><code class="kotlin" data-trim>
+                        fun List&lt;Animal&gt;.hasDogsForSale(): Boolean {
+                            for (animal in this) {
+                                if (animal.species == "Dog" && price != null)
+                                return true
+                            }
+                
+                            return false
+                        }
+                        </code></pre>
+                    </section>
+                </section>
+            
+                <section id="stringform">
+                    <section id="stringform1">
+                        <h3>String Formatting</h3>	
+                        
+                        <pre><code class="kotlin" data-trim>
+                        fun Animal.ageText(): String =
+                            "$name is $age years old."
+                        </code></pre>
+            
+                        <pre class="inline-code"><code class="kotlin">toString()</code></pre> automatically
+            
+                        <br><br>
+                        <small>Can contain expressions</small>
+                        <pre><code class="kotlin" data-trim>
+                        "${1 + 2}" == "3"
+                        </code></pre>
+                    </section>
+            
+                    <section id="stringform2">
+                        <h3>String literals</h3>
+            
+                        <pre><code class="kotlin" data-trim>
+                        val freeText = """
+                            This can contain any text you want,
+                            even "quoted text".
+                            Linebreaks and more is all allowed.
+                        """
+                        </code></pre>
+                    </section>
+                </section>
+            
+                <section id="immut">
+                    <section id="immut1">
+                        <h3>Immutability</h3>
+                    </section>
+            
+                    <section id="immut2">
+                        <p>Shared mutable state is (almost) always complicated.</p>
+                    </section>
+            
+                    <section id="immut3">
+                        <pre><code class="kotlin" data-trim>
+                        fun addAnimalForEmployee(
+                            animal: Animal,
+                            employee: Mitarbeiter
+                        ): Employee {
+                            val toSave = employee.copy(
+                                petName = animal.name
+                            )
+                            
+                            return employeeRepository.save(toSave)
+                        }
+                        </code></pre>
+                    </section>
+            
+                    <section id="immut4">
+                        <h4>Advantages</h4>
+                        <ul>
+                            <li>Code is easier to reason about</li>
+                            <li>Safety when writing concurrent code</li>
+                            <li>Bug prevention</li>
+                        </ul>
+                        <p>Direct support on language level!</p>
+                    </section>
+            
+                    <section id="immut5">
+                        <h4>Disadvantages</h4>
+                        <ul>
+                            <li>Performance can take hits with huge or complex objects</li>
+                            <li>Unintuitive at times</li>
+                        </ul>
+                    </section>
+                    </section>
+            
+                    <section id="std">
+                    <section id="std1">
+                        <h3>The standard library</h3>
+                    </section>
+            
+                    <section id="std2">
+                        <h3>Collection Funktionen</h3>
+                        <pre><code class="kotlin" data-trim>
+                        map(), filter(), fold(), groupBy(), associateBy(),
+                        distinct(), any(), count(), ...
+                        </code></pre>
+                        <p>For <b>all</b> Collections!</p>
+                        <p>Combinable, chainable</p>
+                    </section>
+            
+                    <section id="std3">
+                        <pre><code class="java" data-trim>
+                        public Map&lt;String, Integer&gt; speciesCount() {
+                        List&lt;Animal&gt; animals = this.animalRepository.findAll();
+                            Map&lt;String, Integer&gt; result = new HashMap();
+                            for (Animal animal : animals) {
+                                String species = animal.getSpecies();
+                                result.putIfAbsent(species, 0);
+
+                                result.put(
+                                    species,
+                                    result.get(species) + 1
+                                );
+                            }
+                    
+                            return result;
+                        }
+                        </code></pre>
+            
+                        <i class="fas fa-arrow-down"></i>
+            
+                        <pre><code class="kotlin" data-trim>
+                        fun speciesCount(): Map&lt;String, Int&gt; =
+                            animaRepository.findAll()
+                                .groupBy { it.species }
+                                .mapValues { it.value.count() }
+                        </code></pre>
+                    </section>
+            
+                    <section id="std4">
+                        <pre><code class="kotlin" data-trim>
+                        fun List&lt;Animal&gt;.hasDogsForSale(): Boolean {
+                            for (animal in this) {
+                                if (animal.species == "Dog" && price != null)
+                                return true
+                            }
+            
+                            return false
+                        }
+                        </code></pre>
+            
+                        <i class="fas fa-arrow-down"></i>
+            
+                        <pre><code class="kotlin" data-trim>
+                        fun List&lt;Animal&gt;.hasDogsForSale(): Boolean =
+                            this.any { it.species == "Dog" && price != null }
+                        </code></pre>
+                    </section>
+            
+                    <section id="std5">
+                        <h3>Umgang mit Nullable-Werten</h3>
+                        <h3>Handling nullable types</h3>
+                        <p>Use respective collection functions!</p>
+            
+                        <pre><code class="kotlin" data-trim>
+                        fun employeePets(): List&lt;Animal&gt; =
+                            employeeRepository.findAll()
+                                .mapNotNull { it.petName }
+                                .mapNotNull { animalRepository.findByName(it) }
+                        </code></pre>
+                    </section>
+            
+                    <section id="std10">
+                        <h3>Lambdas</h3>
+                        <p>Lambda shorthand</p>
+                        <p>Last argument has to be lambda</p>
+            
+                        <pre><code class="kotlin" data-trim>
+                        fun doSomething(lambda: () -> Int) { ... }
+                        </code></pre>
+            
+                        <i class="fas fa-arrow-down"></i>
+            
+                        <pre><code class="kotlin" data-trim>
+                        doSomething {
+                            println("Hello World!")
+                            123
+                        }
+                        </code></pre>
+                    </section>
+            
+                    <section id="std11">
+                        <h4>map</h4>
+                        <pre><code class="kotlin" data-trim>
+                        fun &lt;T, R&gt; Iterable&lt;T&gt;.map(
+                        transform: (T) -&gt; R
+                        ): Iterable&lt;R&gt; { ... }
+                        </code></pre>
+                    </section>
+                </section>
+            
+                <section id="perf">
+                    <h3>Performance</h3>
+                    <ul>
+                        <li>Optimized higher order functions on collections</li>
+                        <li>Async and parallization with green threads</li>
+                        <li>Safety in Concurrency with immutability</li>
+                        <li>Easy optimizations with language constructs (e.g. tail recursion)</li>
+                    </ul>
+                </section>
+            
+                <section id="interop">
+                    <section id="interop1">
+                        <h3>Interop with Java</h3>
+                        <ul>
+                        <li>Access to the <b>entire</b> Java-Ecosystem</li>
+                        <li>Java <i class="fas fa-arrow-right fa-xs"></i> Kotlin</li>
+                        <li>Kotlin <i class="fas fa-arrow-right fa-xs"></i> Java</li>
+                        <li>Plugins for all major IDEs and (easy) commandline-compilation</li>
+                        <li><pre><code data-trim class="kotlin">import as</code></pre></li>
+                        </ul>
+                    </section>
+            
+                    <section id="interop2">
+                        <p>Support from big companies</p>
+                        <ul>
+                        <li>Pivotal (Spring)</li>
+                        <li>Google and Android</li>
+                        <li>Gradle</li>
+                        <li>Atlassian, Uber, Pinterest, Evernote...</li>
+                        </ul>
+                    </section>
+                </section>
+            
+                <section id="questions">
+                    <h2>Questions?</h2>
+                </section>
+            
+                <section id="thx">
+                    <h2>Thank you!</h2>
+                </section>
+            </div>
+        </div>
+
+        <script src="js/head.min.js"></script>
+        <script src="js/reveal.js"></script>
+
+        <script>
+            // More info about config & dependencies:
+            // - https://github.com/hakimel/reveal.js#configuration
+            // - https://github.com/hakimel/reveal.js#dependencies
+            Reveal.initialize({
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js' },
+                    { src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+                ]
+            });
+        </script>
+    </body>
+</html>
