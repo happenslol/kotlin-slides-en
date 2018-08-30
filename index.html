@@ -233,7 +233,8 @@
                         <pre><code data-trim class="kotlin">
                             @GetMapping("/{name}")
                             fun findOne(@PathVariable("name") name: String): Animal =
-                                animalService.findAnimal(name) ?: throw AnimalNotFoundException()
+                                animalService.findAnimal(name)
+                                    ?: throw AnimalNotFoundException()
                         </code></pre>
                     </section>
                 </section>
@@ -313,7 +314,7 @@
                     </section>
             
                     <section id="ext5">
-                        On any type, even generics!
+                        On any type, even types with generics!
             
                         <pre><code class="kotlin" data-trim>
                         fun List&lt;Animal&gt;.hasDogsForSale(): Boolean {
@@ -369,18 +370,23 @@
                     </section>
             
                     <section id="immut3">
-                        <pre><code class="kotlin" data-trim>
-                        fun addAnimalForEmployee(
-                            animal: Animal,
-                            employee: Mitarbeiter
-                        ): Employee {
-                            val toSave = employee.copy(
-                                petName = animal.name
-                            )
-                            
-                            return employeeRepository.save(toSave)
-                        }
-                        </code></pre>
+                        <p>How do we mutate things?</p>
+
+                        <div class="fragment">
+                            <p>By copying them!</p>
+                            <pre><code class="kotlin" data-trim>
+                            fun addAnimalForEmployee(
+                                animal: Animal,
+                                employee: Mitarbeiter
+                            ): Employee {
+                                val toSave = employee.copy(
+                                    petName = animal.name
+                                )
+                                
+                                return employeeRepository.save(toSave)
+                            }
+                            </code></pre>
+                        </div>
                     </section>
             
                     <section id="immut4">
@@ -390,7 +396,7 @@
                             <li>Safety when writing concurrent code</li>
                             <li>Bug prevention</li>
                         </ul>
-                        <p>Direct support on language level!</p>
+                        <p class="fragment">Direct support on language level!</p>
                     </section>
             
                     <section id="immut5">
@@ -440,7 +446,7 @@
             
                         <pre><code class="kotlin" data-trim>
                         fun speciesCount(): Map&lt;String, Int&gt; =
-                            animaRepository.findAll()
+                            animalRepository.findAll()
                                 .groupBy { it.species }
                                 .mapValues { it.value.count() }
                         </code></pre>
@@ -477,6 +483,18 @@
                                 .mapNotNull { animalRepository.findByName(it) }
                         </code></pre>
                     </section>
+
+                    <section id="std6">
+                        <h2>Standard.kt</h2>
+                        <pre></pre><code class="kotlin" data-trim>
+                            let(), apply(), with(), run(), use(), also(), ...
+                        </code></pre>
+                        <br><br>
+                        <h4>Examples for these</h4>
+                        <a href="http://beust.com/weblog/2015/10/30/exploring-the-kotlin-standard-library/">
+                          beust.com/weblog/2015/10/30/exploring-the-kotlin-standard-library
+                        </a>
+                    </section>
             
                     <section id="std10">
                         <h3>Lambdas</h3>
@@ -501,7 +519,7 @@
                         <h4>map</h4>
                         <pre><code class="kotlin" data-trim>
                         fun &lt;T, R&gt; Iterable&lt;T&gt;.map(
-                        transform: (T) -&gt; R
+                            transform: (T) -&gt; R
                         ): Iterable&lt;R&gt; { ... }
                         </code></pre>
                     </section>
@@ -530,7 +548,7 @@
                     </section>
             
                     <section id="interop2">
-                        <p>Support from big companies</p>
+                        <h2>Support from big companies</h2>
                         <ul>
                         <li>Pivotal (Spring)</li>
                         <li>Google and Android</li>
@@ -548,7 +566,7 @@
                     </section>
 
                     <section id="replace-2">
-                        <p class="fragment">For you and/or your company?</p>
+                        <p>For you and/or your company?</p>
                         <p class="fragment">Definitely!</p>
                     </section>
                 </section>
