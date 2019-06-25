@@ -62,7 +62,7 @@
                 <section id="projekt">
                     <h3>Sample project</h3>
                     <p>API for managing a pet shop</p>
-                    <p>Spring Boot with MongoDB</p>
+                    <p>Spring Boot with Spring Data</p>
                     <p>Entities: Animal, Species, Food, Employee...</p>
                 </section>
             
@@ -167,7 +167,7 @@
                         fun functionWithLotsOfParams(
                             p1: String, p2: Int, p3: Int, p4: String,
                             p5: String = "default", p6: Int = 0
-                        ): Typ
+                        ): Type
             
                         val test = functionWithLotsOfParams(
                             p1 = "Hello World!",
@@ -189,7 +189,7 @@
                         <pre><code data-trim class="kotlin">
                         fun findAnimal(name: String): Animal?
             
-                        val animal = findAnimal("Peter")
+                        val animal = findAnimal("Fido")
             
                         // error!
                         print(animal.species)
@@ -214,7 +214,7 @@
                     <section id="null4">
                         <h4>Unchecked Exceptions</h4>
             
-                        <p>Exceptions are Expressions and satisfy any return type!</p>
+                        <p>Exceptions satisfy any return type!</p>
             
                         <pre><code data-trim class="java">
                             @GetMapping("/{name}")
@@ -445,10 +445,9 @@
                         <i class="fas fa-arrow-down"></i>
             
                         <pre><code class="kotlin" data-trim>
-                        fun speciesCount(): Map&lt;String, Int&gt; =
-                            animalRepository.findAll()
-                                .groupBy { it.species }
-                                .mapValues { it.value.count() }
+                        fun speciesCount() = animalRepository.findAll()
+                            .groupBy { it.species }
+                            .mapValues { it.value.count() }
                         </code></pre>
                     </section>
             
@@ -467,7 +466,7 @@
                         <i class="fas fa-arrow-down"></i>
             
                         <pre><code class="kotlin" data-trim>
-                        fun List&lt;Animal&gt;.hasDogsForSale(): Boolean =
+                        fun List&lt;Animal&gt;.hasDogsForSale() =
                             this.any { it.species == "Dog" && price != null }
                         </code></pre>
                     </section>
@@ -522,6 +521,10 @@
                             transform: (T) -&gt; R
                         ): Iterable&lt;R&gt; { ... }
                         </code></pre>
+                        <br>
+                        <pre><code class="kotlin" data-trim>
+                        val names = animals.map { it.name }
+                        </code></pre>
                     </section>
                 </section>
             
@@ -553,14 +556,14 @@
                         <li>Pivotal (Spring)</li>
                         <li>Google and Android</li>
                         <li>Gradle</li>
-                        <li>Atlassian, Uber, Pinterest, Evernote...</li>
+                        <li>Atlassian, Slack, Uber, Pinterest, Evernote...</li>
                         </ul>
                     </section>
                 </section>
 
                 <section id="replace">
                     <section id="replace-1">
-                        <h2>Will it replace Java?</h2>
+                        <h2>Can it replace Java?</h2>
                         <p class="fragment">For the entire industry?</p>
                         <p class="fragment">Probably not very soon.</p>
                     </section>
@@ -580,6 +583,9 @@
                     <br>
                     <a href="https://kotlin-slides.happens.lol">kotlin-slides.happens.lol</a>
                     <a href="https://github.com/happenslol/petshop">github.com/happenslol/petshop</a>
+                    <a href="https://happens.lol">happens.lol</a>
+                    <br>
+                    <a href="mailto:me@hwgnd.de">me@hwgnd.de</a>
                 </section>
             </div>
         </div>
